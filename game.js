@@ -284,6 +284,9 @@ console.log(getGlobals(100,100))
 
 }
 function setup() {
+  
+  playerCam.width = document.body.clientWidth;
+  playerCam.height = document.body.clientHeight;
   createCanvas(playerCam.width, playerCam.height);
 
   noSmooth();
@@ -293,11 +296,21 @@ function setup() {
   graphics = new graphicsBuffer(totalBuffersX,totalBuffersY)
   renderAll()
   
-
   //renderToBuffer(0,0)
   //image(graphics.buffers[0][0],0,0)
   getBuffer(1,1)
 }
+
+/**
+ * Dynamically resize canvas with the actual window
+ */
+function windowResized() {
+  playerCam.width = document.body.clientWidth;
+  playerCam.height = document.body.clientHeight;
+  createCanvas(playerCam.width, playerCam.height);
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 
 function draw() {
   background(0)
