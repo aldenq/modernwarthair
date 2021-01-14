@@ -67,6 +67,7 @@ class graphicsBuffer{
       for (y1 = 0; y1 < y; y1++){
         this.buffers[x1][y1] = createGraphics(bufferXpx, bufferYpx)
         this.buffers[x1][y1].background(255)
+        this.buffers[x1][y1].noStroke()
       }
     }
 }}
