@@ -1,24 +1,39 @@
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
-    <script src="game.js"></script>
+
+
+
+    <link rel="stylesheet" href="uikit/css/uikit.css" />
     <script src="uikit/js/uikit.min.js"></script>
     <script src="uikit/js/uikit-icons.min.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="uikit/css/uikit.min.css" />
-
+    
   
+
   </head>
-
-
+  
   <body>
+    <div id="contextbody">
+      <div id="globalGeneralOffcanvas" uk-offcanvas="bg-close:false;">
+        <div id="globalGeneralOffcanvasOuter" class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
 
+
+
+          </div>
+
+      </div>
+    </div>
     <main>
 
 
-
     </main>
+  
 
+  <script src="uiengine.js"></script>
+  <script src="game.js"></script>
   </body>
+
 </html>
+
