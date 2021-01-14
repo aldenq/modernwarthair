@@ -164,15 +164,36 @@ class ContextMenu{
         this.chunkList = undefined;
     }
 
+    /**
+     * Info Needed:
+     *  Stats
+     *  Health bar
+     *  Upgrades
+     */
+
+     /**
+      * Extend class to be specialized for Unit Info / Upgrades
+      *     Stats
+      *     Upgrades
+      *     Special Abilities
+      *         -Progress bars 
+      */
+
+     /**
+      * Unit Menu
+      *     Appear below units onscreen
+      *     contains moves
+      */
+
 }
 
 var test = new ContextMenu();
-test.pushButton("A Button!");
-var test2 = new ContextMenu();
-test2.pushButton("Another Button!");
+test.pushTitle("Stats");
+test.pushButton("A Button!", function(){}, "Tooltip", "$50");
+test.pushTitle("Upgrades");
+test.pushButton("B Button!", function(){}, "Tooltip", "$50");
+test.pushTitle("Special Abilities");
+test.pushButton("B Button!", function(){}, "Tooltip", "$50");
 
-var bigtest = new ContextMenu();
-bigtest.pushTitle("Title");
-pages = [test.raw, test2.raw];
-bigtest.pushSwapper(pages, ["Page 1", "Page 2"]);
-bigtest.beginRender();
+
+test.beginRender();
