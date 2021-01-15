@@ -1,0 +1,19 @@
+body{
+    overflow: hidden;
+}
+
+
+.sidemenu{
+    
+    position: relative;
+    top: 0px;
+    left: auto;
+    right: 0px;
+    height: 100%;
+    width: 350px;
+    transition: left 0.3s;
+}
+.sidemenu::after{
+    left:0px;
+    right:auto;
+}

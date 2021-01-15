@@ -1,6 +1,6 @@
 
-boardWidth = 500
-boardHeight = 500
+boardWidth = 100
+boardHeight = 100
 bufferWidth = 50
 bufferHeight = 50
 tileSize = 50
