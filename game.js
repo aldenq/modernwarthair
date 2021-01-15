@@ -113,6 +113,7 @@ class GraphicsBuffer{
     for (x1 = 0; x1<x; x1++){
       for (y1 = 0; y1 < y; y1++){
         this.buffers[x1][y1] = createGraphics(bufferXpx, bufferYpx)
+
         this.buffers[x1][y1].background(100)
         //this.buffers[x1][y1].image(tileStats["grass"].img,0,0)
         //this.buffers[x1][y1].noStroke()
@@ -372,6 +373,17 @@ function windowResized() {
   createCanvas(playerCam.width, playerCam.height);
   resizeCanvas(windowWidth, windowHeight);
 }
+
+/**
+ * Dynamically resize canvas with the actual window
+ */
+function windowResized() {
+  playerCam.width = document.body.clientWidth;
+  playerCam.height = document.body.clientHeight;
+  createCanvas(playerCam.width, playerCam.height);
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 
 
 function draw() {
