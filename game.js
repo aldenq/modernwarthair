@@ -1,6 +1,6 @@
 
-boardWidth = 500
-boardHeight = 500
+boardWidth = 50
+boardHeight = 50
 bufferWidth = 50
 bufferHeight = 50
 tileSize = 50
@@ -68,6 +68,7 @@ class graphicsBuffer{
         this.buffers[x1][y1] = createGraphics(bufferXpx, bufferYpx)
         this.buffers[x1][y1].background(255)
         this.buffers[x1][y1].noStroke()
+        this.buffers[x1][y1].noSmooth();
       }
     }
 }}
@@ -316,7 +317,7 @@ function windowResized() {
 function draw() {
   background(0)
   mouseDrag()
-
+  
   playerCam.zx =playerCam.x * playerCam.zoom
   playerCam.zy =playerCam.y* playerCam.zoom
   drawOnscreenBuffers()
@@ -326,5 +327,7 @@ function draw() {
     targetZoom -= Math.sign(targetZoom)
   }
   //playerCam.x += 1
+  fill(255,255,255)
+  text(frameRate().toString(),400,400)
 }
 
