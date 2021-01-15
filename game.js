@@ -3,7 +3,7 @@ boardWidth = 50
 boardHeight = 50
 bufferWidth = 50
 bufferHeight = 50
-tileSize = 50
+tileSize = 256
 bufferXpx = tileSize*bufferWidth
 bufferYpx = tileSize*bufferHeight
 totalBuffersX = boardWidth/bufferWidth
@@ -12,18 +12,65 @@ totalBuffersY = boardHeight/bufferHeight
 targetZoom = 1
 
 
-class tile {
+
+unitsJson = {}
 
 
-  constructor(){
-    this.redv = rand(0,255)
-    this.greenv = rand(0,255)
-    this.bluev = rand(0,255)
+
+tileStats  = {
+
+
+  grass:{
+    srcs: ["grass.png","grass2.png","grass3.png","grass4.png"],
+    imgs: []
+    }
+
+
+
+
+
+
+}
+
+
+
+class Unit {
+  constructor(unitType){
+    self.unitStats = unitsJson[unitType]
+    
+
+
+}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Tile {
+  constructor(tileType){
+    this.tileType = tileType
+    this.tileNum = rand(0,3)
 
   }
 }
 
-class board {
+class Board {
   constructor(x,y){
     this.board = matrix(x,y);
 
@@ -32,7 +79,7 @@ class board {
 
       for (let y1 = 0; y1 < y; y1++){
 
-        this.board[x1][y1] = new tile()
+        this.board[x1][y1] = new Tile("grass")
       }
     }
     console.log("done initiating")
@@ -58,7 +105,7 @@ class camera { //camera class is used for the users view area
 
 
 
-class graphicsBuffer{
+class GraphicsBuffer{
   constructor(x,y){
     this.buffers = matrix(x,y)
     var x1;
@@ -66,9 +113,10 @@ class graphicsBuffer{
     for (x1 = 0; x1<x; x1++){
       for (y1 = 0; y1 < y; y1++){
         this.buffers[x1][y1] = createGraphics(bufferXpx, bufferYpx)
-        this.buffers[x1][y1].background(255)
-        this.buffers[x1][y1].noStroke()
-        this.buffers[x1][y1].noSmooth();
+        this.buffers[x1][y1].background(100)
+        //this.buffers[x1][y1].image(tileStats["grass"].img,0,0)
+        //this.buffers[x1][y1].noStroke()
+        //this.buffers[x1][y1].noSmooth();
       }
     }
 }}
@@ -79,14 +127,12 @@ class graphicsBuffer{
 
 
 var graphics;
-gameBoard = new board(boardWidth,boardHeight);
+gameBoard = new Board(boardWidth,boardHeight);
 playerCam = new camera()
 
 
 function rand(min,max){
   return(Math.floor(max*Math.random() + min  ))
-
-
 }
 
 function renderToBuffer(bufferX,bufferY){
@@ -99,8 +145,10 @@ function renderToBuffer(bufferX,bufferY){
       relX = x-xstart;
       relY = y-ystart;
       bTile = gameBoard.board[x][y];
-      gBuff.fill(bTile.redv,bTile.greenv,bTile.bluev)
-      gBuff.rect(relX*tileSize,relY*tileSize,tileSize,tileSize);
+      //console.log(tileStats[bTile.tileType].image)
+      gBuff.image(tileStats[bTile.tileType].imgs[bTile.tileNum],relX*tileSize,relY*tileSize,256,256 )
+      //gBuff.fill(bTile.redv,bTile.greenv,bTile.bluev)
+      //gBuff.rect(relX*tileSize,relY*tileSize,tileSize,tileSize);
     }
   }
 }
@@ -285,23 +333,35 @@ console.log(getGlobals(100,100))
 
 
 }
+
+
+function preload() {
+  for (let i in tileStats) {
+    for (let id = 0; id < 4; id ++){
+    tileStats[i].imgs.push(loadImage("assets/tiles/"+tileStats[i].srcs[id]))
+    console.log(i)
+  }}
+}
+
+
+
 function setup() {
   
   playerCam.width = document.body.clientWidth;
   playerCam.height = document.body.clientHeight;
   createCanvas(playerCam.width, playerCam.height);
-
+  
   noSmooth();
   strokeWeight(5)
   background(100)
-  gameBoard.board[0][3] = 1
-  graphics = new graphicsBuffer(totalBuffersX,totalBuffersY)
+  //gameBoard.board[0][3] = 1
+  graphics = new GraphicsBuffer(totalBuffersX,totalBuffersY)
   renderAll()
   
   //renderToBuffer(0,0)
   //image(graphics.buffers[0][0],0,0)
   getBuffer(1,1)
-}
+  }
 
 /**
  * Dynamically resize canvas with the actual window
@@ -329,5 +389,6 @@ function draw() {
   //playerCam.x += 1
   fill(255,255,255)
   text(frameRate().toString(),400,400)
+  
 }
 
